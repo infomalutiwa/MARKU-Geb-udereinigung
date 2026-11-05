@@ -1,4 +1,4 @@
-# Generierte Kopien der Entwürfe (aus Git-Commits 5c61319 / db37e2a erzeugt)
-firebase-vorschau/public/version-1/
+# Wird per firebase-vorschau/build.sh aus dem Hauptstand erzeugt
 firebase-vorschau/public/version-2/
 .firebase/
+firebase-vorschau/.firebase/

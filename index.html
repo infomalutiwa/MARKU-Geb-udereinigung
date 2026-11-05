@@ -12,6 +12,7 @@
   <link rel="icon" href="assets/img/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/img/favicon.png">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/clarity.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -129,26 +130,20 @@
     </div>
   </section>
 
-  <!-- FENSTER-DEMO -->
-  <section class="section" id="fenster">
-    <div class="container container--wide">
-      <div class="head reveal">
-        <span class="eyebrow">Glas- und Fensterreinigung</span>
-        <h2 class="title">Klarer Durchblick.</h2>
-        <p class="subtitle">Wischen Sie selbst – so sieht ein Fenster nach unserer Reinigung aus.</p>
+  <!-- KLARHEIT (Scroll-Szene) -->
+  <section class="clarity" id="fenster" aria-label="Glas- und Fensterreinigung">
+    <div class="clarity__sticky">
+      <div class="clarity__media"><img src="assets/img/haus.webp" alt="Blick durch ein frisch geputztes Fenster auf ein modernes Wohnhaus" width="1600" height="1067"></div>
+      <div class="clarity__haze" aria-hidden="true"></div>
+      <div class="clarity__sheen" aria-hidden="true"></div>
+      <div class="clarity__scrim" aria-hidden="true"></div>
+      <div class="clarity__text">
+        <span class="clarity__eyebrow">Glas- und Fensterreinigung</span>
+        <h2 class="clarity__words"><span class="dim">Staub.</span><span class="dim">Schlieren.</span><span class="dim">Kalkflecken.</span><span>Klarheit.</span></h2>
+        <p class="clarity__sub">Streifenfreie Fenster- und Glasreinigung – innen und außen, für Privat und Gewerbe.</p>
+        <div class="clarity__cta"><a href="#kontakt">Termin anfragen</a></div>
       </div>
-      <div class="wipe reveal-scale" id="wipe">
-        <img src="assets/img/haus.webp" alt="Blick durch ein frisch geputztes Fenster auf ein Wohnhaus" width="1600" height="1067">
-        <canvas aria-label="Interaktive Glasscheibe: mit Maus oder Finger sauber wischen"></canvas>
-        <div class="squeegee" aria-hidden="true"><svg viewBox="0 -62 120 96"><rect x="6" y="14" width="108" height="14" rx="5" fill="#0f265a"/><rect x="4" y="26" width="112" height="6" rx="3" fill="#1d1d1f"/><path d="M52 14 L56 0 h8 l4 14z" fill="#1e64bc"/><rect x="54" y="-60" width="12" height="62" rx="6" fill="#60acf7"/></svg></div>
-        <div class="wipe__hud" aria-live="polite">
-          <span class="wipe__hint">Zum Wischen ziehen</span>
-          <span class="wipe__meter"><b></b></span>
-          <span class="wipe__pct">0 %</span>
-          <button type="button" class="wipe__reset">Nochmal</button>
-        </div>
-      </div>
-      <p class="wipe__caption">Interaktive Darstellung</p>
+      <div class="clarity__progress" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     </div>
   </section>
 
@@ -353,5 +348,6 @@
 </div>
 
 <script src="assets/js/main.js"></script>
+<script src="assets/js/clarity.js"></script>
 </body>
 </html>
