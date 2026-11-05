@@ -274,8 +274,8 @@ p { margin: 0 0 1em; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 980px) {
-  .nav { position: fixed; inset: 76px 0 auto 0; background: #fff; flex-direction: column; align-items: stretch; gap: 0; padding: 8px 20px 20px; border-bottom: 1px solid var(--line); transform: translateY(-120%); transition: transform .25s ease; z-index: -1; }
-  .nav.open { transform: none; }
+  .nav { position: fixed; inset: 76px 0 auto 0; background: #fff; flex-direction: column; align-items: stretch; gap: 0; padding: 8px 20px 20px; border-bottom: 1px solid var(--line); transform: translateY(-120%); transition: transform .25s ease, visibility .25s; z-index: -1; visibility: hidden; }
+  .nav.open { transform: none; visibility: visible; }
   .nav a { padding: 14px 0; border-bottom: 1px solid var(--line); }
   .nav .btn { margin-top: 14px; border: 0; }
   .nav-toggle { display: block; }
@@ -318,3 +318,79 @@ p { margin: 0 0 1em; }
   .mobile-bar a:last-child { background: var(--wa); }
   .mobile-bar svg { width: 20px; height: 20px; }
 }
+
+/* ---------- Reinigungs-Details: Seifenblasen & Glanz ---------- */
+.bubbles { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
+.bubbles i {
+  position: absolute; bottom: -60px; border-radius: 50%;
+  background: radial-gradient(circle at 32% 28%, rgba(255,255,255,.95) 0 8%, rgba(255,255,255,0) 22%),
+              radial-gradient(circle at 50% 50%, rgba(96,172,247,0) 58%, rgba(96,172,247,.35) 72%, rgba(30,100,188,.22) 100%);
+  border: 1px solid rgba(96,172,247,.35);
+  animation: bubble 14s linear infinite;
+}
+.bubbles i:nth-child(1) { left: 4%;  width: 26px; height: 26px; animation-delay: 0s; }
+.bubbles i:nth-child(2) { left: 14%; width: 14px; height: 14px; animation-delay: 3s; animation-duration: 11s; }
+.bubbles i:nth-child(3) { left: 28%; width: 34px; height: 34px; animation-delay: 6s; animation-duration: 17s; }
+.bubbles i:nth-child(4) { left: 39%; width: 18px; height: 18px; animation-delay: 1.5s; }
+.bubbles i:nth-child(5) { left: 47%; width: 22px; height: 22px; animation-delay: 8s; animation-duration: 12s; }
+.bubbles i:nth-child(6) { left: 9%;  width: 40px; height: 40px; animation-delay: 10s; animation-duration: 19s; }
+.bubbles i:nth-child(7) { left: 33%; width: 12px; height: 12px; animation-delay: 4.5s; animation-duration: 10s; }
+.bubbles i:nth-child(8) { left: 22%; width: 20px; height: 20px; animation-delay: 12s; }
+.bubbles i:nth-child(9) { left: 44%; width: 30px; height: 30px; animation-delay: 15s; animation-duration: 16s; }
+@keyframes bubble {
+  0%   { transform: translate(0, 0) scale(.7); opacity: 0; }
+  10%  { opacity: .9; }
+  50%  { transform: translate(24px, -45vh) scale(1); }
+  90%  { opacity: .8; }
+  100% { transform: translate(-12px, -92vh) scale(1.08); opacity: 0; }
+}
+.sparkle { position: absolute; width: 26px; height: 26px; z-index: 2; pointer-events: none; animation: glint 4.5s ease-in-out infinite; }
+.sparkle::before, .sparkle::after { content: ""; position: absolute; inset: 0; margin: auto; background: #fff; border-radius: 2px; box-shadow: 0 0 12px 2px rgba(255,255,255,.8); }
+.sparkle::before { width: 3px; height: 100%; }
+.sparkle::after  { width: 100%; height: 3px; }
+.sparkle--2 { animation-delay: 1.5s; transform: scale(.7); }
+.sparkle--3 { animation-delay: 3s; }
+@keyframes glint { 0%, 70%, 100% { opacity: 0; transform: scale(.3) rotate(0); } 80% { opacity: 1; transform: scale(1) rotate(45deg); } }
+
+/* ---------- Fenster-Wisch-Demo ---------- */
+.wipe {
+  position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--radius);
+  box-shadow: var(--shadow), inset 0 0 0 10px #fff; touch-action: none; user-select: none; cursor: grab;
+  border: 10px solid #fff; outline: 1px solid var(--line);
+}
+.wipe > img, .wipe canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.wipe::after { /* Fensterkreuz */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(#fff, #fff) center / 8px 100% no-repeat;
+  opacity: 0; 
+}
+.squeegee { position: absolute; left: 0; top: 0; width: 26%; pointer-events: none; z-index: 3; opacity: 0; transition: opacity .3s; filter: drop-shadow(0 6px 8px rgba(0,0,0,.35)); }
+.squeegee svg { width: 100%; display: block; overflow: visible; }
+.wipe.is-auto .squeegee { opacity: 1; }
+.wipe__hud {
+  position: absolute; left: 14px; right: 14px; bottom: 14px; z-index: 4; display: flex; align-items: center; gap: 12px;
+  background: rgba(255,255,255,.92); border-radius: var(--radius); padding: 10px 14px; font-size: .82rem; font-weight: 600; color: var(--navy);
+}
+.wipe__hint { flex: 1; }
+.wipe__meter { width: 90px; height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+.wipe__meter b { display: block; height: 100%; width: 0; background: var(--grad); transition: width .2s; }
+.wipe__pct { min-width: 38px; text-align: right; }
+.wipe__done {
+  position: absolute; top: 16px; left: 50%; transform: translate(-50%, -20px); z-index: 4; opacity: 0; pointer-events: none;
+  display: flex; align-items: center; gap: 14px; background: var(--navy); color: #fff; padding: 8px 8px 8px 18px; border-radius: var(--radius);
+  transition: opacity .4s, transform .4s; white-space: nowrap;
+}
+.wipe__done .btn { padding: 8px 14px; font-size: .82rem; }
+.wipe.is-done .wipe__done { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+
+.steps { list-style: none; padding: 0; margin: 26px 0 0; display: grid; gap: 18px; counter-reset: s; }
+.steps li { display: flex; gap: 16px; align-items: flex-start; }
+.steps b {
+  flex: none; width: 44px; height: 44px; display: grid; place-items: center; color: #fff; font-size: 1.05rem;
+  background: var(--grad); clip-path: polygon(18% 0, 100% 0, 82% 100%, 0 100%);
+}
+.steps h3 { margin: 2px 0 2px; }
+.steps p { margin: 0; color: var(--muted); font-size: .92rem; }
+
+@media (prefers-reduced-motion: reduce) { .bubbles, .sparkle { display: none; } }
+@media (max-width: 640px) { .wipe { aspect-ratio: 1 / 1; border-width: 6px; } .wipe__hint { font-size: .74rem; } .wipe__meter { width: 56px; } }

@@ -77,8 +77,12 @@
         </div>
         <div aria-hidden="true"></div>
       </div>
+      <div class="bubbles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
       <div class="hero__media hero__full">
         <img src="assets/img/team.webp" alt="MARKU-Team bei der Reinigung einer Wohnung" width="1535" height="1024" fetchpriority="high">
+        <span class="sparkle" style="top:22%;left:38%" aria-hidden="true"></span>
+        <span class="sparkle sparkle--2" style="top:58%;left:70%" aria-hidden="true"></span>
+        <span class="sparkle sparkle--3" style="top:34%;left:86%" aria-hidden="true"></span>
         <div class="hero__badge">
           <img src="assets/img/logo-mark.png" alt="" width="44" height="32">
           <div><strong>Privat &amp; Gewerbe</strong><span>Regelmäßig oder einmalig – individuell abgestimmt</span></div>
@@ -144,6 +148,7 @@
     </div>
   </section>
 
+
   <!-- BANNER -->
   <section class="banner banner--slant" aria-label="Unser Versprechen">
     <img src="assets/img/korridor.webp" alt="" loading="lazy" width="1600" height="1068">
@@ -152,6 +157,34 @@
       <h2>MARKU – Sauberkeit, auf die Sie sich verlassen können!</h2>
       <p>Ob regelmäßige Reinigung, einmaliger Auftrag oder langfristige Zusammenarbeit – wir sind Ihr zuverlässiger Ansprechpartner für Sauberkeit und Werterhalt.</p>
       <a class="btn btn--ghost" href="#kontakt">Angebot anfordern</a>
+    </div>
+  </section>
+
+
+  <!-- SO LÄUFT'S AB + WISCH-DEMO -->
+  <section class="section" id="ablauf">
+    <div class="container split">
+      <div class="wipe reveal" id="wipe">
+        <img src="assets/img/haus.webp" alt="Blick durch ein frisch geputztes Fenster" width="1600" height="1067">
+        <canvas aria-label="Interaktive Glasscheibe: wischen Sie das Fenster sauber"></canvas>
+        <div class="squeegee" aria-hidden="true"><svg viewBox="0 -62 120 96"><rect x="6" y="14" width="108" height="14" rx="4" fill="#0f265a"/><rect x="4" y="26" width="112" height="6" rx="3" fill="#1b1b1b"/><path d="M52 14 L56 0 h8 l4 14z" fill="#1e64bc"/><rect x="54" y="-60" width="12" height="62" rx="6" fill="#60acf7"/></svg></div>
+        <div class="wipe__hud">
+          <span class="wipe__hint">Selbst wischen – mit Maus oder Finger</span>
+          <span class="wipe__meter"><b></b></span>
+          <span class="wipe__pct">0 %</span>
+        </div>
+        <div class="wipe__done"><strong>Streifenfrei sauber.</strong><button type="button" class="btn btn--ghost wipe__reset">Nochmal</button></div>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">So läuft's ab</span>
+        <h2>In vier Schritten zu gepflegten Räumen</h2>
+        <ol class="steps">
+          <li><b>1</b><div><h3>Anfrage</h3><p>Rufen Sie Claudia an, schreiben Sie per WhatsApp oder nutzen Sie das Formular.</p></div></li>
+          <li><b>2</b><div><h3>Besichtigung &amp; Angebot</h3><p>Wir schauen uns Ihr Objekt an und erstellen ein transparentes, individuelles Angebot.</p></div></li>
+          <li><b>3</b><div><h3>Reinigung</h3><p>Unser Team reinigt gründlich, zuverlässig und zum vereinbarten Termin.</p></div></li>
+          <li><b>4</b><div><h3>Qualitätskontrolle</h3><p>Wir prüfen das Ergebnis und bleiben Ihr fester Ansprechpartner.</p></div></li>
+        </ol>
+      </div>
     </div>
   </section>
 
