@@ -18,7 +18,7 @@
   }
 
   // Einblenden beim Scrollen
-  var items = document.querySelectorAll(".reveal");
+  var items = document.querySelectorAll(".reveal, .reveal-scale");
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
@@ -32,7 +32,7 @@
   var lb = document.getElementById("lightbox");
   if (lb) {
     var lbImg = lb.querySelector("img");
-    document.querySelectorAll(".gallery figure").forEach(function (fig) {
+    document.querySelectorAll(".carousel figure").forEach(function (fig) {
       fig.addEventListener("click", function () {
         var img = fig.querySelector("img");
         lbImg.src = img.src; lbImg.alt = img.alt; lb.classList.add("open");
@@ -98,9 +98,8 @@
   function rnd(a, b) { return a + Math.random() * (b - a); }
 
   function drawDirt() {
-    var r = box.getBoundingClientRect();
     dpr = Math.min(window.devicePixelRatio || 1, 2);
-    W = Math.round(r.width - 20); H = Math.round(r.height - 20); // minus Rahmen
+    W = box.clientWidth; H = box.clientHeight;
     if (W < 10) return;
     cv.width = W * dpr; cv.height = H * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -160,7 +159,7 @@
     for (var i = 3; i < d.length; i += step) { n++; if (d[i] < 40) clear++; }
     var p = Math.round(clear / n * 100);
     bar.style.width = p + "%"; pct.textContent = p + " %";
-    if (p >= 90 && !done) { done = true; box.classList.add("is-done"); ctx.clearRect(0, 0, W, H); bar.style.width = "100%"; pct.textContent = "100 %"; }
+    if (p >= 90 && !done) { done = true; box.classList.add("is-done"); ctx.clearRect(0, 0, W, H); bar.style.width = "100%"; pct.textContent = "Streifenfrei sauber"; }
   }
 
   // Automatische Vorführung: senkrechte Bahnen mit dem Abzieher
@@ -179,7 +178,7 @@
         var k = Math.min(1, (ts - t0) / dur), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
         y = -10 + e * (H + 20);
         erase(x, last - 3, x, y, blade); last = y;
-        sq.style.transform = "translate(" + (x - sqW / 2 + 10) + "px," + (y - sqW * .28 + 10) + "px)";
+        sq.style.transform = "translate(" + (x - sqW / 2) + "px," + (y - sqW * .7) + "px)";
         update();
         if (k < 1) requestAnimationFrame(frame); else { col++; setTimeout(stroke, 160); }
       }
@@ -216,4 +215,22 @@
   }
   if (img.complete && img.naturalWidth) init(); else img.addEventListener("load", init);
   var rt, lastW = 0; window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(function () { var w = box.clientWidth; if (w !== lastW && !done) { lastW = w; drawDirt(); played = false; } }, 250); });
+})();
+
+// Galerie-Karussell: Pfeile
+(function () {
+  var c = document.querySelector(".carousel"); if (!c) return;
+  var prev = document.querySelector("[data-carousel=prev]"), next = document.querySelector("[data-carousel=next]");
+  function step() { var f = c.querySelector("figure"); return f ? f.getBoundingClientRect().width + 20 : 300; }
+  function state() { prev.disabled = c.scrollLeft < 8; next.disabled = c.scrollLeft + c.clientWidth > c.scrollWidth - 8; }
+  prev.addEventListener("click", function () { c.scrollBy({ left: -step(), behavior: "smooth" }); });
+  next.addEventListener("click", function () { c.scrollBy({ left: step(), behavior: "smooth" }); });
+  c.addEventListener("scroll", state, { passive: true }); state();
+})();
+
+// Mobile Schnellaktionen erst nach dem Hero einblenden
+(function () {
+  var q = document.querySelector(".quickbar"); if (!q) return;
+  function on() { q.classList.toggle("show", window.scrollY > 520); }
+  window.addEventListener("scroll", on, { passive: true }); on();
 })();
