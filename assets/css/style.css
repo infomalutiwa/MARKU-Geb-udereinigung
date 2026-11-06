@@ -104,6 +104,14 @@ p { margin: 0; }
 .fact strong { display: block; font-size: 19px; font-weight: 600; letter-spacing: -.02em; }
 .fact span { color: var(--text-2); font-size: 15px; }
 
+/* Über uns / Firmensitz */
+.about { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(32px, 6vw, 88px); align-items: center; }
+.about .subtitle { margin-top: 16px; }
+.about__body { margin-top: 18px; color: var(--text-2); font-size: 17px; max-width: 540px; }
+.about__media { margin: 0; justify-self: end; width: 100%; max-width: 480px; }
+.about__media img { width: 100%; aspect-ratio: 567 / 694; object-fit: cover; border-radius: var(--r-tile); box-shadow: 0 40px 80px -40px rgba(15, 38, 90, .45); }
+@media (max-width: 860px) { .about { grid-template-columns: 1fr; } .about__media { justify-self: center; } }
+
 /* Bento-Kacheln */
 .bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; }
 .tile { position: relative; overflow: hidden; border-radius: var(--r-tile); background: #fff; min-height: 440px; display: flex; flex-direction: column; isolation: isolate; }
