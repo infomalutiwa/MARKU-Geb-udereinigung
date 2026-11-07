@@ -394,3 +394,14 @@ p { margin: 0 0 1em; }
 
 @media (prefers-reduced-motion: reduce) { .bubbles, .sparkle { display: none; } }
 @media (max-width: 640px) { .wipe { aspect-ratio: 1 / 1; border-width: 6px; } .wipe__hint { font-size: .74rem; } .wipe__meter { width: 56px; } }
+
+/* Hero-Titel im Stil von Entwurf 2 (Systemschrift, tiefes Schwarz) */
+.hero__title {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", "Segoe UI", Roboto, Arial, sans-serif;
+  color: #1d1d1f;
+  font-size: clamp(2.4rem, 4.6vw, 3.9rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -.035em;
+  -webkit-font-smoothing: antialiased;
+}
