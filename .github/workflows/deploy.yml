@@ -1,4 +1,4 @@
-# Lädt die Website bei jedem Push auf "main" per FTPS zu ALL-INKL hoch.
+# Lädt die Website bei jedem Push auf "neue-webseite" oder "main" per FTPS zu ALL-INKL hoch.
 # Zugangsdaten stehen als Repository-Secrets (Settings > Secrets and variables > Actions):
 #   FTP_SERVER   z. B. w022499d.kasserver.com  (siehe KAS > FTP > Info-Button)
 #   FTP_USERNAME f0192927
@@ -7,7 +7,7 @@ name: Deploy zu ALL-INKL
 
 on:
   push:
-    branches: [main]
+    branches: [neue-webseite, main]
   workflow_dispatch:
 
 concurrency:
@@ -17,9 +17,16 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      FTP_SERVER: ${{ secrets.FTP_SERVER }}
     steps:
+      - name: Hinweis, falls Zugangsdaten fehlen
+        if: env.FTP_SERVER == ''
+        run: echo "::warning::FTP-Secrets fehlen (FTP_SERVER, FTP_USERNAME, FTP_PASSWORD) – es wurde nichts hochgeladen."
       - uses: actions/checkout@v4
+        if: env.FTP_SERVER != ''
       - name: Per FTPS hochladen
+        if: env.FTP_SERVER != ''
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
