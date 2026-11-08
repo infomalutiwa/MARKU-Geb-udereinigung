@@ -15,5 +15,3 @@ Repository → Settings → Secrets and variables → Actions → *New repositor
 Manuell starten: Actions → „Deploy zu ALL-INKL“ → *Run workflow*.
 Das Verzeichnis des FTP-Nutzers ist der Domain-Ordner `/xn--marku-gebudeservice-owb.de/` (Domain: marku-gebäudeservice.de).
 
-## Vor dem Livegang
-- Straße und Hausnummer im Impressum eintragen (`impressum.html`, `datenschutz.html`, gelb markiert).
