@@ -405,3 +405,14 @@ p { margin: 0 0 1em; }
   letter-spacing: -.035em;
   -webkit-font-smoothing: antialiased;
 }
+
+/* Social-Links als klare Buttons */
+.info-list .social { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+.info-list a.social__btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 4px;
+  border: 1.5px solid var(--blue); color: var(--blue); font-weight: 700; font-size: .9rem; text-decoration: none;
+  transition: background .2s, color .2s;
+}
+.info-list a.social__btn svg { width: 18px; height: 18px; margin: 0; color: inherit; flex: none; }
+.info-list a.social__btn::after { content: "↗"; font-weight: 700; }
+.info-list a.social__btn:hover { background: var(--blue); color: #fff; }
