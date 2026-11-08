@@ -1,4 +1,4 @@
-# Wird per firebase-vorschau/build.sh aus dem Hauptstand erzeugt
-firebase-vorschau/public/version-1/
+# Wird per firebase-vorschau/build.sh erzeugt
+firebase-vorschau/public/
 .firebase/
 firebase-vorschau/.firebase/
