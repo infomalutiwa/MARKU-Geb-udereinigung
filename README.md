@@ -13,5 +13,7 @@ Repository → Settings → Secrets and variables → Actions → *New repositor
 | `FTP_PASSWORD` | Passwort des FTP-Benutzers |
 
 Manuell starten: Actions → „Deploy zu ALL-INKL“ → *Run workflow*.
-Das Verzeichnis des FTP-Nutzers ist der Domain-Ordner `/xn--marku-gebudeservice-owb.de/` (Domain: marku-gebäudeservice.de).
+Domain: **https://marku-gebaeudeservice.de/** (vorher marku-gebäudeservice.de).
+Das Verzeichnis des FTP-Nutzers muss im KAS auf den Ordner der Domain `marku-gebaeudeservice.de` zeigen
+(bisher `/xn--marku-gebudeservice-owb.de/`) – alternativ die neue Domain im KAS auf den bisherigen Ordner leiten.
 
