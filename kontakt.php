@@ -3,8 +3,9 @@
 // Läuft auf dem ALL-INKL-Webspace (PHP mail()). Antwort immer als JSON.
 
 const EMPFAENGER = 'marku.services@gmail.com';
-// Absender muss eine Adresse der eigenen Domain sein, sonst landet die Mail im Spam.
-const ABSENDER   = 'kontakt@marku-gebaeudeservice.de';
+// Absender auf der eigenen Domain (wichtig gegen Spam-Einstufung). Ein Postfach dafür
+// ist nicht nötig – Antworten gehen per Reply-To direkt an den Kunden.
+const ABSENDER   = 'noreply@marku-gebaeudeservice.de';
 const MIN_SEKUNDEN = 3; // schneller ausgefüllte Formulare stammen fast immer von Bots
 
 date_default_timezone_set('Europe/Berlin');
