@@ -258,6 +258,20 @@ p { margin: 0 0 1em; }
 .footer__bottom { margin-top: 40px; padding-top: 22px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: .82rem; }
 
 /* ---------- Mobile Aktionsleiste ---------- */
+/* Signatur Webdesign */
+.credit { margin-top: 22px; display: flex; justify-content: center; }
+.credit a {
+  display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px;
+  background: var(--white); color: var(--muted); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;
+  transition: border-color .25s, box-shadow .25s, color .25s;
+}
+.credit a:hover { color: var(--navy); border-color: var(--sky); box-shadow: var(--shadow); }
+.credit__heart { width: 12px; height: 12px; fill: #e0245e; transform-origin: center; }
+.credit a:hover .credit__heart { animation: credit-beat 1s ease-in-out infinite; }
+.credit__name { font-weight: 700; letter-spacing: .12em; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+@keyframes credit-beat { 0%, 100% { transform: scale(1); } 15% { transform: scale(1.25); } 30% { transform: scale(1); } 45% { transform: scale(1.15); } }
+@media (prefers-reduced-motion: reduce) { .credit a:hover .credit__heart { animation: none; } }
+
 .mobile-bar { display: none; }
 
 /* ---------- Rechtliches ---------- */
