@@ -42,11 +42,14 @@
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") lb.classList.remove("open"); });
   }
 
-  // Kontaktformular -> WhatsApp oder E-Mail
+  // Kontaktformular: "Anfrage senden" -> kontakt.php (Server-Mail), "Per WhatsApp" -> wa.me
   var form = document.getElementById("contact-form");
   if (form) {
     var err = document.getElementById("form-error");
-    var via = "whatsapp";
+    var ok = document.getElementById("form-success");
+    var started = document.getElementById("f-started");
+    if (started) started.value = Date.now();
+    var via = "mail";
     form.querySelectorAll("button[data-via]").forEach(function (b) {
       b.addEventListener("click", function () { via = b.dataset.via; });
     });
@@ -54,13 +57,13 @@
       e.preventDefault();
       var f = form.elements;
       var name = f.name.value.trim(), msg = f.message.value.trim();
+      ok.style.display = "none";
       if (!name || !msg) { return showErr("Bitte geben Sie Ihren Namen und eine Nachricht ein."); }
       if (!document.getElementById("f-consent").checked) { return showErr("Bitte stimmen Sie der Verarbeitung Ihrer Angaben zu."); }
-      err.style.display = "none";
 
       var service = f.service.selectedIndex > 0 ? f.service.value : "";
       var opt = function (label, v) { v = v.trim(); return v ? label + ": " + v : null; };
-      var lines = [
+      var text = [
         "Anfrage über die Website",
         "Name: " + name,
         opt("Telefon", f.phone.value),
@@ -69,15 +72,47 @@
         opt("Leistung", service),
         "",
         msg
-      ].filter(function (l) { return l !== null; });
-      var text = lines.join("\n");
+      ].filter(function (l) { return l !== null; }).join("\n");
 
-      if (via === "mail") {
-        var subject = "Anfrage" + (service ? ": " + service : "") + " – " + name;
-        window.location.href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(text);
-      } else {
+      if (via === "whatsapp") {
+        err.style.display = "none";
         window.open("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(text), "_blank", "noopener");
+        return;
       }
+
+      var mail = f.email.value.trim();
+      if (!mail && !f.phone.value.trim()) { return showErr("Bitte geben Sie eine Telefonnummer oder E-Mail-Adresse an, damit wir Sie erreichen können."); }
+      if (mail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) { return showErr("Bitte prüfen Sie Ihre E-Mail-Adresse."); }
+      err.style.display = "none";
+
+      var btn = form.querySelector('button[data-via="mail"]');
+      var label = btn.querySelector("span");
+      var oldLabel = label.textContent;
+      btn.disabled = true; label.textContent = "Wird gesendet …";
+
+      // Falls der Server nicht erreichbar ist: E-Mail-Programm als Rückfalloption öffnen
+      var fallback = function () {
+        var subject = "Anfrage" + (service ? ": " + service : "") + " – " + name;
+        showErr("Die Nachricht konnte nicht automatisch gesendet werden. Ihr E-Mail-Programm wird geöffnet – alternativ erreichen Sie uns per WhatsApp oder Telefon.");
+        window.location.href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(text);
+      };
+
+      fetch(form.getAttribute("action"), { method: "POST", body: new FormData(form), headers: { "Accept": "application/json" } })
+        .then(function (r) { return r.json().then(function (d) { return { status: r.status, data: d }; }); })
+        .then(function (res) {
+          if (res.data && res.data.ok) {
+            form.reset();
+            if (started) started.value = Date.now();
+            ok.textContent = res.data.message;
+            ok.style.display = "block";
+          } else if (res.status === 422 && res.data && res.data.message) {
+            showErr(res.data.message);
+          } else {
+            fallback();
+          }
+        })
+        .catch(fallback)
+        .then(function () { btn.disabled = false; label.textContent = oldLabel; });
     });
     function showErr(t) { err.textContent = t; err.style.display = "block"; }
   }

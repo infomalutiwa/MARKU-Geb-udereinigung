@@ -246,6 +246,9 @@ p { margin: 0 0 1em; }
 .form__actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .form__note { font-size: .78rem; color: var(--muted); margin: 14px 0 0; text-align: center; }
 .form__error { color: #c0392b; font-size: .85rem; font-weight: 600; margin: 0 0 12px; display: none; }
+.form__success { color: #1d7a46; background: #e9f7ef; border: 1px solid #bfe5cf; border-radius: var(--radius); padding: 12px 14px; font-size: .9rem; font-weight: 600; margin: 0 0 12px; display: none; }
+.form__hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.form button[disabled] { opacity: .65; cursor: wait; }
 
 /* ---------- Footer ---------- */
 .footer { background: var(--soft); border-top: 1px solid var(--line); padding: 56px 0 28px; font-size: .9rem; color: var(--muted); }

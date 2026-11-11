@@ -288,9 +288,9 @@
           </ul>
         </div>
 
-        <form class="form reveal" id="contact-form" novalidate>
+        <form class="form reveal" id="contact-form" action="kontakt.php" method="post" novalidate>
           <h3>Nachricht schreiben</h3>
-          <p>Füllen Sie das Formular aus und senden Sie es bequem per WhatsApp oder E-Mail.</p>
+          <p>Füllen Sie das Formular aus – wir melden uns schnellstmöglich. Gern auch direkt per WhatsApp.</p>
           <div class="form__row">
             <div class="field"><label for="f-name">Name *</label><input id="f-name" name="name" autocomplete="name" required></div>
             <div class="field"><label for="f-phone">Telefon</label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
@@ -316,11 +316,14 @@
             </select>
           </div>
           <div class="field"><label for="f-msg">Ihre Nachricht *</label><textarea id="f-msg" name="message" required placeholder="Was dürfen wir für Sie tun? Größe, Häufigkeit, Wunschtermin …"></textarea></div>
-          <label class="consent"><input type="checkbox" id="f-consent" required> <span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage verwendet werden. Mehr in der <a href="datenschutz.html">Datenschutzerklärung</a>.</span></label>
+          <label class="consent"><input type="checkbox" id="f-consent" name="consent" value="ja" required> <span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage verwendet werden. Mehr in der <a href="datenschutz.html">Datenschutzerklärung</a>.</span></label>
+          <div class="form__hp" aria-hidden="true"><label for="f-website">Website</label><input id="f-website" name="website" tabindex="-1" autocomplete="off"></div>
+          <input type="hidden" name="started" id="f-started">
           <p class="form__error" id="form-error" role="alert"></p>
+          <p class="form__success" id="form-success" role="status"></p>
           <div class="form__actions">
             <button type="submit" class="btn btn--wa" data-via="whatsapp"><svg><use href="#i-wa"/></svg>Per WhatsApp</button>
-            <button type="submit" class="btn btn--primary" data-via="mail"><svg><use href="#i-mail"/></svg>Per E-Mail</button>
+            <button type="submit" class="btn btn--primary" data-via="mail"><svg><use href="#i-mail"/></svg><span>Anfrage senden</span></button>
           </div>
           <p class="form__note">Oder direkt anrufen: <a href="tel:+4915255682011">+49 1525 5682011</a> </p>
         </form>
